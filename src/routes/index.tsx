@@ -51,7 +51,7 @@ const hörproben = [
   {
     titel: "„Human“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
-    driveId: "1NmuYiO6KoVodYB005xncHkzzOrE2KPFP",
+    driveId: "1NmuYiO6KoqodYB005xncHkzzOrE2KPFP",
   },
   {
     titel: "„You will be found“",

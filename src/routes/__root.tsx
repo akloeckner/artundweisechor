@@ -78,17 +78,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Chor Kantate – Amateurchor in Frankfurt am Main" },
+      { title: "art & weise – Popchor aus Köln · Popmusik & Kölsche Tön" },
       {
         name: "description",
         content:
-          "Chor Kantate: Ein Amateurchor in Frankfurt am Main. Konzerte, Proben mittwochs – mitsingen ganz ohne Vorsingen.",
+          "art & weise: knapp 40 Sängerinnen und Sänger aus Köln unter der Leitung von Katharina Becker. Popmusik, Gospels und kölsche Tön – live und zu buchen.",
       },
-      { name: "author", content: "Chor Kantate" },
-      { property: "og:title", content: "Chor Kantate – Amateurchor in Frankfurt am Main" },
+      { name: "author", content: "art & weise chor" },
+      { property: "og:title", content: "art & weise – Popchor aus Köln" },
       {
         property: "og:description",
-        content: "Konzerte, Proben mittwochs – mitsingen ganz ohne Vorsingen.",
+        content: "Popmusik, Gospels und kölsche Tön – live auf der Bühne und auf Ihrem Fest zu buchen.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -111,7 +111,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
   }),
   shellComponent: RootShell,
@@ -122,7 +122,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="de">
       <head>
         <HeadContent />
       </head>

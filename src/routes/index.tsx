@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Facebook, Instagram, Youtube } from "lucide-react";
 import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
@@ -311,6 +312,35 @@ function Index() {
         <div className="mt-5 space-y-2 text-sm text-paper/70">
           <p>Popchor aus Köln · Leitung Katharina Becker</p>
           <p>info@artundweisechor.de · 0163 4719264</p>
+        </div>
+        <div className="mt-6 flex items-center gap-2">
+          <a
+            href="https://www.facebook.com/artundweisechor"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="art & weise auf Facebook"
+            className="flex size-10 items-center justify-center rounded-full ring-1 ring-paper/25 transition-colors hover:bg-paper/10"
+          >
+            <Facebook className="size-5" aria-hidden="true" />
+          </a>
+          <a
+            href="https://www.instagram.com/artundweisechor/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="art & weise auf Instagram"
+            className="flex size-10 items-center justify-center rounded-full ring-1 ring-paper/25 transition-colors hover:bg-paper/10"
+          >
+            <Instagram className="size-5" aria-hidden="true" />
+          </a>
+          <a
+            href="https://www.youtube.com/user/ARTUNDWEISECHOR"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="art & weise auf YouTube"
+            className="flex size-10 items-center justify-center rounded-full ring-1 ring-paper/25 transition-colors hover:bg-paper/10"
+          >
+            <Youtube className="size-5" aria-hidden="true" />
+          </a>
         </div>
         <div className="mt-8 flex items-center justify-between gap-4 border-t border-paper/10 pt-5">
           <span className="text-xs text-paper/50">© 2026 art &amp; weise chor</span>

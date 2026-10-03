@@ -9,7 +9,7 @@ export const Route = createFileRoute("/impressum")({
         content: "Impressum und Anbieterkennzeichnung des Chors art & weise aus Köln.",
       },
       { name: "robots", content: "noindex" },
-+     { property: "og:title", content: "Impressum – art & weise chor" },
+      { property: "og:title", content: "Impressum – art & weise chor" },
       {
         property: "og:description",
         content: "Impressum und Anbieterkennzeichnung des Chors art & weise aus Köln.",

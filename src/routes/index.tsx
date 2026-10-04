@@ -55,6 +55,7 @@ const hörproben = [
 function Index() {
   const kalenderRef = useRef<HTMLIFrameElement>(null);
   const [kalenderHoehe, setKalenderHoehe] = useState(320);
+  const [kalenderBereit, setKalenderBereit] = useState(false);
 
   useEffect(() => {
     function updateKalenderHoehe(event: MessageEvent) {
@@ -70,6 +71,7 @@ function Index() {
     }
 
     window.addEventListener("message", updateKalenderHoehe);
+    setKalenderBereit(true);
     return () => window.removeEventListener("message", updateKalenderHoehe);
   }, []);
 
@@ -136,14 +138,16 @@ function Index() {
           <span className="size-3 shrink-0 rounded-full bg-poster-yellow" />
         </div>
         <div className="overflow-hidden rounded-md bg-paper p-3 sm:p-5">
-          <iframe
-            ref={kalenderRef}
-            src={kalenderUrl}
-            title="Aktuelle Auftritte von art & weise"
-            loading="lazy"
-            className="block w-full border-0 bg-paper"
-            style={{ height: kalenderHoehe }}
-          />
+          {kalenderBereit && (
+            <iframe
+              ref={kalenderRef}
+              src={kalenderUrl}
+              title="Aktuelle Auftritte von art & weise"
+              loading="lazy"
+              className="block w-full border-0 bg-paper"
+              style={{ height: kalenderHoehe }}
+            />
+          )}
         </div>
       </section>
 

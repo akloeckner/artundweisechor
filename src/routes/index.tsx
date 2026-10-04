@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "art & weise: knapp 40 Sängerinnen und Sänger aus Köln unter der Leitung von Katharina Becker. Popmusik, Gospels und kölsche Tön – live auf der Bühne und auf Ihrem Fest zu buchen.",
+          "art & weise: knapp 40 Sängerinnen und Sänger aus Köln unter der Leitung von Kathi Becker. Popmusik, Gospels und kölsche Tön – live auf der Bühne und auf Ihrem Fest zu buchen.",
       },
       { property: "og:title", content: "art & weise – Popchor aus Köln" },
       {
@@ -104,7 +104,7 @@ function Index() {
         </p>
         <p className="mt-6 max-w-[42ch] text-pretty text-base leading-relaxed text-ink/80">
           Knapp 40 Sängerinnen und Sänger aus Köln und Umgebung unter der
-          Leitung von Katharina Becker – mit vielstimmigem Gesang und
+          Leitung von Kathi Becker – mit vielstimmigem Gesang und
           passenden Choreografien auf der Bühne.
         </p>
         <div className="mt-8 flex items-center gap-3">
@@ -190,7 +190,7 @@ function Index() {
             <div className="font-grotesk mt-1 text-sm font-medium text-ink/70">Zuhause</div>
           </div>
           <div className="rounded-[min(4vw,12px)] bg-paper p-4 ring-1 ring-black/5">
-            <div className="font-display text-xl leading-none text-ink">Katharina Becker</div>
+            <div className="font-display text-xl leading-none text-ink">Kathi Becker</div>
             <div className="font-grotesk mt-1 text-sm font-medium text-ink/70">Leitung</div>
           </div>
         </div>
@@ -313,7 +313,7 @@ function Index() {
           art &amp; weise
         </div>
         <div className="mt-5 space-y-2 text-sm text-paper/70">
-          <p>Popchor aus Köln · Leitung Katharina Becker</p>
+          <p>Popchor aus Köln · Leitung Kathi Becker</p>
           <p>info@artundweisechor.de · 0163 4719264</p>
         </div>
         <div className="mt-6 flex items-center gap-2">

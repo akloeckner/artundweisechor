@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "art & weise: knapp 40 Sängerinnen und Sänger aus Köln unter der Leitung von Katharina Becker. Popmusik, Gospels und kölsche Tön – live und zu buchen.",
+          "art & weise: knapp 40 Sängerinnen und Sänger aus Köln unter der Leitung von Kathi Becker. Popmusik, Gospels und kölsche Tön – live und zu buchen.",
       },
       { name: "author", content: "art & weise chor" },
       { property: "og:title", content: "art & weise – Popchor aus Köln" },

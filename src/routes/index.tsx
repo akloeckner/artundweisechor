@@ -204,12 +204,6 @@ function Index() {
       </div>
 
       <section className="reveal reveal-1 px-6 pb-14 pt-8">
-        <div className="mb-7 flex items-start gap-3">
-          <div className="mt-1.5 size-2.5 shrink-0 rounded-full bg-poster-red" />
-          <p className="font-grotesk max-w-[48ch] text-[13px] font-semibold uppercase tracking-[0.22em] text-warm-muted">
-            Popchor · gegr. 2010 · Köln
-          </p>
-        </div>
         <h1 className="font-display text-balance text-[clamp(2.6rem,13vw,4.1rem)] uppercase leading-none tracking-[-0.03em]">
           <span className="block">art &amp;</span>
           <span className="block text-poster-red">weise</span>

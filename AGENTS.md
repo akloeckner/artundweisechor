@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep upcoming performances embedded from the choir's Konzertmeister calendar, with origin-checked message-based height resizing; this keeps dates current without manually maintained copies.
+- The home page stays one scrolling page whose sections are reached through the sticky header's in-page anchors (with scroll-margin and a scroll-spy for the active item); register any new section in that nav list so the bar and its active state stay complete.

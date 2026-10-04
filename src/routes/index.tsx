@@ -52,10 +52,18 @@ const hörproben = [
   },
 ];
 
+const navItems = [
+  { id: "live", label: "Auftritte" },
+  { id: "wir-ueber-uns", label: "Über uns" },
+  { id: "zuhoeren", label: "Zuhören" },
+  { id: "mitsingen", label: "Mitsingen" },
+];
+
 function Index() {
   const kalenderRef = useRef<HTMLIFrameElement>(null);
   const [kalenderHoehe, setKalenderHoehe] = useState(320);
   const [kalenderBereit, setKalenderBereit] = useState(false);
+  const [aktiv, setAktiv] = useState("");
 
   useEffect(() => {
     function updateKalenderHoehe(event: MessageEvent) {
@@ -75,17 +83,71 @@ function Index() {
     return () => window.removeEventListener("message", updateKalenderHoehe);
   }, []);
 
+  useEffect(() => {
+    const abschnitte = navItems
+      .map((item) => document.getElementById(item.id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (abschnitte.length === 0) return;
+
+    const beobachter = new IntersectionObserver(
+      (einträge) => {
+        const sichtbar = einträge.find((eintrag) => eintrag.isIntersecting);
+        if (sichtbar) setAktiv(sichtbar.target.id);
+      },
+      { rootMargin: "-40% 0px -55% 0px" },
+    );
+
+    abschnitte.forEach((el) => beobachter.observe(el));
+    return () => beobachter.disconnect();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-paper font-sans text-ink antialiased">
-      <header className="flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-3">
-          <span className="size-4 shrink-0 rounded-full bg-poster-red" />
-          <span className="size-4 shrink-0 rounded-full bg-poster-blue" />
-          <span className="size-4 shrink-0 rounded-full bg-poster-yellow" />
+    <div id="top" className="min-h-screen bg-paper font-sans text-ink antialiased">
+      <header className="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur">
+        <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-6 py-3 md:flex md:justify-between">
+          <a
+            href="#top"
+            aria-label="Zurück zum Seitenanfang"
+            className="flex min-w-0 items-center gap-2.5"
+          >
+            <span className="flex shrink-0 items-center gap-1">
+              <span className="size-2.5 rounded-full bg-poster-red" />
+              <span className="size-2.5 rounded-full bg-poster-blue" />
+              <span className="size-2.5 rounded-full bg-poster-yellow" />
+            </span>
+            <span className="font-grotesk truncate text-[13px] font-semibold uppercase tracking-[0.2em]">
+              art &amp; weise
+            </span>
+          </a>
+
+          <nav
+            aria-label="Hauptnavigation"
+            className="hidden items-center gap-7 md:flex"
+          >
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={aktiv === item.id ? "true" : undefined}
+                className={
+                  "font-grotesk text-[12px] font-semibold uppercase tracking-[0.16em] transition-colors " +
+                  (aktiv === item.id
+                    ? "text-poster-red"
+                    : "text-ink/55 hover:text-ink")
+                }
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <a
+            href="#buchen"
+            className="font-grotesk shrink-0 rounded-full bg-poster-red px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-paper ring-1 ring-poster-red transition-transform hover:-translate-y-0.5"
+          >
+            Buchen
+          </a>
         </div>
-        <span className="font-grotesk text-[13px] font-semibold uppercase tracking-[0.2em]">
-          art &amp; weise
-        </span>
       </header>
 
       <section className="reveal reveal-1 px-6 pb-14 pt-8">
@@ -130,7 +192,7 @@ function Index() {
         />
       </section>
 
-      <section id="live" className="reveal reveal-2 bg-poster-red px-6 py-12 text-paper">
+      <section id="live" className="reveal reveal-2 scroll-mt-16 bg-poster-red px-6 py-12 text-paper">
         <div className="mb-7 flex items-end justify-between gap-3">
           <p className="font-grotesk text-[13px] font-semibold uppercase tracking-[0.22em]">
             Unsere nächsten Auftritte
@@ -151,7 +213,7 @@ function Index() {
         </div>
       </section>
 
-      <section id="wir-ueber-uns" className="reveal reveal-3 bg-cream px-6 py-12">
+      <section id="wir-ueber-uns" className="reveal reveal-3 scroll-mt-16 bg-cream px-6 py-12">
         <div className="mb-6 flex items-center gap-3">
           <div className="size-10 shrink-0 rounded-full bg-poster-blue" />
           <div className="size-3.5 shrink-0 rounded-full bg-poster-red" />
@@ -203,7 +265,7 @@ function Index() {
         />
       </section>
 
-      <section id="zuhoeren" className="reveal reveal-4 bg-poster-blue px-6 py-12 text-paper">
+      <section id="zuhoeren" className="reveal reveal-4 scroll-mt-16 bg-poster-blue px-6 py-12 text-paper">
         <div className="mb-6 flex items-center gap-3">
           <div className="size-3.5 shrink-0 rounded-full bg-poster-yellow" />
           <div className="size-3.5 shrink-0 rounded-full bg-poster-red" />
@@ -251,7 +313,7 @@ function Index() {
         </a>
       </section>
 
-      <section id="mitsingen" className="reveal reveal-5 bg-cream px-6 py-12">
+      <section id="mitsingen" className="reveal reveal-5 scroll-mt-16 bg-cream px-6 py-12">
         <div className="mb-6 flex items-center gap-3">
           <div className="size-3.5 shrink-0 rounded-full bg-poster-red" />
           <div className="size-3.5 shrink-0 rounded-full bg-poster-blue" />
@@ -273,7 +335,7 @@ function Index() {
         />
       </section>
 
-      <section id="buchen" className="reveal reveal-6 bg-poster-red px-6 py-12 text-paper">
+      <section id="buchen" className="reveal reveal-6 scroll-mt-16 bg-poster-red px-6 py-12 text-paper">
         <div className="mb-6 flex items-center gap-3">
           <div className="size-3.5 shrink-0 rounded-full bg-poster-yellow" />
           <div className="size-3.5 shrink-0 rounded-full bg-poster-blue" />

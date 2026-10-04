@@ -239,7 +239,7 @@ function Index() {
         />
       </section>
 
-      <section id="live" className="reveal reveal-2 scroll-mt-16 bg-poster-red px-6 py-12 text-paper">
+      <section id="live" className="reveal reveal-2 scroll-mt-0 md:scroll-mt-[44px] bg-poster-red px-6 py-12 text-paper">
         <div className="mb-7 flex items-end justify-between gap-3">
           <p className="font-grotesk text-[13px] font-semibold uppercase tracking-[0.22em]">
             Unsere nächsten Auftritte
@@ -260,7 +260,7 @@ function Index() {
         </div>
       </section>
 
-      <section id="wir-ueber-uns" className="reveal reveal-3 scroll-mt-16 bg-cream px-6 py-12">
+      <section id="wir-ueber-uns" className="reveal reveal-3 scroll-mt-0 md:scroll-mt-[44px] bg-cream px-6 py-12">
         <div className="mb-6 flex items-center gap-3">
           <div className="size-10 shrink-0 rounded-full bg-poster-blue" />
           <div className="size-3.5 shrink-0 rounded-full bg-poster-red" />
@@ -312,7 +312,7 @@ function Index() {
         />
       </section>
 
-      <section id="zuhoeren" className="reveal reveal-4 scroll-mt-16 bg-poster-blue px-6 py-12 text-paper">
+      <section id="zuhoeren" className="reveal reveal-4 scroll-mt-0 md:scroll-mt-[44px] bg-poster-blue px-6 py-12 text-paper">
         <div className="mb-6 flex items-center gap-3">
           <div className="size-3.5 shrink-0 rounded-full bg-poster-yellow" />
           <div className="size-3.5 shrink-0 rounded-full bg-poster-red" />
@@ -360,7 +360,7 @@ function Index() {
         </a>
       </section>
 
-      <section id="mitsingen" className="reveal reveal-5 scroll-mt-16 bg-cream px-6 py-12">
+      <section id="mitsingen" className="reveal reveal-5 scroll-mt-0 md:scroll-mt-[44px] bg-cream px-6 py-12">
         <div className="mb-6 flex items-center gap-3">
           <div className="size-3.5 shrink-0 rounded-full bg-poster-red" />
           <div className="size-3.5 shrink-0 rounded-full bg-poster-blue" />
@@ -382,7 +382,7 @@ function Index() {
         />
       </section>
 
-      <section id="buchen" className="reveal reveal-6 scroll-mt-16 bg-poster-red px-6 py-12 text-paper">
+      <section id="buchen" className="reveal reveal-6 scroll-mt-0 md:scroll-mt-[44px] bg-poster-red px-6 py-12 text-paper">
         <div className="mb-6 flex items-center gap-3">
           <div className="size-3.5 shrink-0 rounded-full bg-poster-yellow" />
           <div className="size-3.5 shrink-0 rounded-full bg-poster-blue" />

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Youtube } from "lucide-react";
+import { Facebook, Instagram, Menu, X, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
@@ -57,13 +58,34 @@ const navItems = [
   { id: "wir-ueber-uns", label: "Über uns" },
   { id: "zuhoeren", label: "Zuhören" },
   { id: "mitsingen", label: "Mitsingen" },
+  { id: "buchen", label: "Buchen" },
 ];
 
 function Index() {
   const kalenderRef = useRef<HTMLIFrameElement>(null);
+  const mobilNavRef = useRef<HTMLDivElement>(null);
   const [kalenderHoehe, setKalenderHoehe] = useState(320);
   const [kalenderBereit, setKalenderBereit] = useState(false);
   const [aktiv, setAktiv] = useState("");
+  const [menueOffen, setMenueOffen] = useState(false);
+
+  useEffect(() => {
+    if (!menueOffen) return;
+    function schliessenBeiAussenklick(event: PointerEvent) {
+      if (event.target instanceof Node && !mobilNavRef.current?.contains(event.target)) {
+        setMenueOffen(false);
+      }
+    }
+    function schliessenMitEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") setMenueOffen(false);
+    }
+    document.addEventListener("pointerdown", schliessenBeiAussenklick);
+    document.addEventListener("keydown", schliessenMitEscape);
+    return () => {
+      document.removeEventListener("pointerdown", schliessenBeiAussenklick);
+      document.removeEventListener("keydown", schliessenMitEscape);
+    };
+  }, [menueOffen]);
 
   useEffect(() => {
     function updateKalenderHoehe(event: MessageEvent) {
@@ -103,8 +125,8 @@ function Index() {
 
   return (
     <div id="top" className="min-h-screen bg-paper font-sans text-ink antialiased">
-      <header className="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur">
-        <div className="mx-auto grid max-w-5xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-6 py-3 md:flex md:justify-between">
+      <header className="sticky top-0 z-50 hidden border-b border-ink/10 bg-paper/95 backdrop-blur md:block">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-6 py-3">
           <a
             href="#top"
             aria-label="Zurück zum Seitenanfang"
@@ -122,7 +144,7 @@ function Index() {
 
           <nav
             aria-label="Hauptnavigation"
-            className="hidden items-center gap-7 md:flex"
+            className="flex items-center gap-7"
           >
             {navItems.map((item) => (
               <a
@@ -141,14 +163,45 @@ function Index() {
             ))}
           </nav>
 
-          <a
-            href="#buchen"
-            className="font-grotesk shrink-0 rounded-full bg-poster-red px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.16em] text-paper ring-1 ring-poster-red transition-transform hover:-translate-y-0.5"
-          >
-            Buchen
-          </a>
         </div>
       </header>
+
+      <div ref={mobilNavRef} className="fixed right-4 top-4 z-50 md:hidden">
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          aria-label={menueOffen ? "Menü schließen" : "Menü öffnen"}
+          aria-expanded={menueOffen}
+          aria-controls="mobiles-menue"
+          onClick={() => setMenueOffen((offen) => !offen)}
+          className="size-12 rounded-md border-ink/20 bg-paper text-ink shadow-md hover:bg-cream hover:text-ink"
+        >
+          {menueOffen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+        </Button>
+        {menueOffen && (
+          <nav
+            id="mobiles-menue"
+            aria-label="Hauptnavigation"
+            className="absolute right-0 top-14 w-56 rounded-md border border-ink/15 bg-paper p-2 shadow-lg"
+          >
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={aktiv === item.id ? "true" : undefined}
+                onClick={() => setMenueOffen(false)}
+                className={
+                  "font-grotesk block rounded-sm px-3 py-3 text-[12px] font-semibold uppercase tracking-[0.16em] transition-colors hover:bg-cream " +
+                  (aktiv === item.id ? "text-poster-red" : "text-ink/70")
+                }
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        )}
+      </div>
 
       <section className="reveal reveal-1 px-6 pb-14 pt-8">
         <div className="mb-7 flex items-start gap-3">

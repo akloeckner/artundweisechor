@@ -240,13 +240,15 @@ function Index() {
       </section>
 
       <section id="live" className="reveal reveal-2 scroll-mt-0 md:scroll-mt-[44px] bg-poster-red px-6 py-12 text-paper">
-        <div className="mb-7 flex items-end justify-between gap-3">
-          <p className="font-grotesk text-[13px] font-semibold uppercase tracking-[0.22em]">
-            Unsere nächsten Auftritte
-          </p>
-          <span className="size-3 shrink-0 rounded-full bg-poster-yellow" />
+        <div className="mb-6 flex items-center gap-3">
+          <div className="size-3.5 shrink-0 rounded-full bg-poster-yellow" />
+          <div className="size-3.5 shrink-0 rounded-full bg-poster-blue" />
         </div>
-        <div className="overflow-hidden rounded-md bg-paper p-3 sm:p-5">
+        <h2 className="font-display max-w-[40ch] text-balance text-3xl uppercase leading-none tracking-[-0.02em]">
+          Unsere nächsten Auftritte
+        </h2>
+        <div className="mt-8 overflow-hidden rounded-md bg-paper p-3 sm:p-5">
+
           {kalenderBereit && (
             <iframe
               ref={kalenderRef}

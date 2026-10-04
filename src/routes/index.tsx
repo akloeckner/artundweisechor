@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Youtube } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
@@ -31,22 +32,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const konzerte = [
-  {
-    tag: "10",
-    wochentag: "Do",
-    monat: "Dez",
-    titel: "Weihnachtsmarkt am Dom",
-    ort: "Köln · 19:30 – 21:00 Uhr",
-  },
-  {
-    tag: "19",
-    wochentag: "Sa",
-    monat: "Dez",
-    titel: "Weihnachtsmarkt am Dom",
-    ort: "Köln · 19:30 – 21:00 Uhr",
-  },
-];
+const kalenderUrl = "https://rest.konzertmeister.app/api/v3/org/OALS_282031f6-fe57-46aa-9a34-06e387424012/upcomingappointments?types=2&showDescription=false&onlyPublicsite=false&limit=100&display=light&lang=de&hash=36191c81fa12d6c77553fcd9bcbf53d7c20f4b34ef238d90b84ae9046fff786c";
 
 const hörproben = [
   {
@@ -67,6 +53,28 @@ const hörproben = [
 ];
 
 function Index() {
+  const kalenderRef = useRef<HTMLIFrameElement>(null);
+  const [kalenderHoehe, setKalenderHoehe] = useState(320);
+  const [kalenderBereit, setKalenderBereit] = useState(false);
+
+  useEffect(() => {
+    function updateKalenderHoehe(event: MessageEvent) {
+      if (
+        event.origin !== "https://rest.konzertmeister.app" ||
+        event.source !== kalenderRef.current?.contentWindow
+      ) return;
+
+      const hoehe = event.data?.kmAppointmentListHeight;
+      if (typeof hoehe === "number" && Number.isFinite(hoehe) && hoehe > 0) {
+        setKalenderHoehe(Math.ceil(hoehe));
+      }
+    }
+
+    window.addEventListener("message", updateKalenderHoehe);
+    setKalenderBereit(true);
+    return () => window.removeEventListener("message", updateKalenderHoehe);
+  }, []);
+
   return (
     <div className="min-h-screen bg-paper font-sans text-ink antialiased">
       <header className="flex items-center justify-between px-6 py-4">
@@ -127,24 +135,19 @@ function Index() {
           <p className="font-grotesk text-[13px] font-semibold uppercase tracking-[0.22em]">
             Unsere nächsten Auftritte
           </p>
-          <span className="font-grotesk text-sm font-medium text-paper/80">2026</span>
+          <span className="size-3 shrink-0 rounded-full bg-poster-yellow" />
         </div>
-        <div className="divide-y divide-paper/15">
-          {konzerte.map((k, i) => (
-            <div key={i} className="flex items-center gap-4 py-4">
-              <div className="w-14 shrink-0 text-center">
-                <div className="font-display text-xl leading-none">{k.tag}</div>
-                <div className="font-grotesk mt-1 text-[11px] font-medium uppercase tracking-[0.15em]">
-                  {k.wochentag} · {k.monat}
-                </div>
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="font-grotesk text-base font-semibold leading-tight">{k.titel}</div>
-                <div className="text-sm text-paper/70">{k.ort}</div>
-              </div>
-              <span className="size-2.5 shrink-0 rounded-full bg-poster-yellow" />
-            </div>
-          ))}
+        <div className="overflow-hidden rounded-md bg-paper p-3 sm:p-5">
+          {kalenderBereit && (
+            <iframe
+              ref={kalenderRef}
+              src={kalenderUrl}
+              title="Aktuelle Auftritte von art & weise"
+              loading="lazy"
+              className="block w-full border-0 bg-paper"
+              style={{ height: kalenderHoehe }}
+            />
+          )}
         </div>
       </section>
 

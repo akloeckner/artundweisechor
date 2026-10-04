@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep upcoming performances embedded from the choir's Konzertmeister calendar, with origin-checked message-based height resizing; this keeps dates current without manually maintained copies.

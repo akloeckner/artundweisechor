@@ -6,6 +6,9 @@ import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
 import wdrImage from "@/assets/wdr.jpg";
+import standbildHuman from "@/assets/video-human.jpg.asset.json";
+import standbildFound from "@/assets/video-you-will-be-found.jpg.asset.json";
+import standbildJlaeser from "@/assets/video-alle-glaeser-huh.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,16 +43,19 @@ const hörproben = [
     titel: "„Human“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "1NmuYiO6KoqodYB005xncHkzzOrE2KPFP",
+    standbild: standbildHuman.url,
   },
   {
     titel: "„You will be found“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "1kivRRaJGmbaM5ztkNppi6EcePiMUT6F6",
+    standbild: standbildFound.url,
   },
   {
     titel: "„Alle Jläser huh“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "19fmw7w49r0p8LgJQf2BjHSg3kq6uxa8j",
+    standbild: standbildJlaeser.url,
   },
 ];
 
@@ -61,7 +67,7 @@ const navItems = [
   { id: "buchen", label: "Buchen" },
 ];
 
-function VideoKlick({ driveId, titel }: { driveId: string; titel: string }) {
+function VideoKlick({ driveId, titel, standbild }: { driveId: string; titel: string; standbild: string }) {
   const [an, setAn] = useState(false);
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink/20 ring-1 ring-paper/20">
@@ -79,8 +85,8 @@ function VideoKlick({ driveId, titel }: { driveId: string; titel: string }) {
           aria-label={`Video ${titel} abspielen`}
           className="group relative block size-full text-left"
         >
-          <img src={buehneImage} alt="" className="size-full object-cover opacity-70" />
-          <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/40 p-4 text-center">
+          <img src={standbild} alt="" loading="lazy" className="size-full object-cover" />
+          <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/30 p-4 text-center">
             <span className="flex size-16 items-center justify-center rounded-full bg-poster-yellow text-ink transition-transform group-hover:scale-105">
               <Play className="ml-1 size-7" aria-hidden="true" />
             </span>
@@ -365,7 +371,7 @@ function Index() {
         <div className="mt-8 space-y-6">
           {hörproben.map((h) => (
             <figure key={h.driveId}>
-              <VideoKlick driveId={h.driveId} titel={h.titel} />
+              <VideoKlick driveId={h.driveId} titel={h.titel} standbild={h.standbild} />
               <figcaption className="font-grotesk mt-2 text-sm font-medium text-paper/80">
                 {h.titel} · {h.kontext}
               </figcaption>

@@ -126,6 +126,14 @@ function Impressum() {
             möglich, stets auf freiwilliger Basis. Diese Daten werden ohne
             Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.
           </p>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Diese Webseite setzt selbst keine Cookies und verwendet keine
+            Analyse- oder Tracking-Werkzeuge. Schriften werden von unserem
+            eigenen Server geladen. Die Konzertvideos stammen von Google Drive
+            und werden erst geladen, wenn Sie sie per Klick abspielen; dabei
+            gelten die Datenschutzbestimmungen von Google. Unsere Termine
+            werden aus dem Dienst Konzertmeister eingebunden.
+          </p>
         </section>
       </main>
     </div>

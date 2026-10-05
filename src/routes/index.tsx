@@ -67,7 +67,7 @@ const navItems = [
   { id: "buchen", label: "Buchen" },
 ];
 
-function VideoKlick({ driveId, titel }: { driveId: string; titel: string }) {
+function VideoKlick({ driveId, titel, standbild }: { driveId: string; titel: string; standbild: string }) {
   const [an, setAn] = useState(false);
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink/20 ring-1 ring-paper/20">
@@ -85,8 +85,8 @@ function VideoKlick({ driveId, titel }: { driveId: string; titel: string }) {
           aria-label={`Video ${titel} abspielen`}
           className="group relative block size-full text-left"
         >
-          <img src={buehneImage} alt="" className="size-full object-cover opacity-70" />
-          <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/40 p-4 text-center">
+          <img src={standbild} alt="" loading="lazy" className="size-full object-cover" />
+          <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/30 p-4 text-center">
             <span className="flex size-16 items-center justify-center rounded-full bg-poster-yellow text-ink transition-transform group-hover:scale-105">
               <Play className="ml-1 size-7" aria-hidden="true" />
             </span>
@@ -371,7 +371,7 @@ function Index() {
         <div className="mt-8 space-y-6">
           {hörproben.map((h) => (
             <figure key={h.driveId}>
-              <VideoKlick driveId={h.driveId} titel={h.titel} />
+              <VideoKlick driveId={h.driveId} titel={h.titel} standbild={h.standbild} />
               <figcaption className="font-grotesk mt-2 text-sm font-medium text-paper/80">
                 {h.titel} · {h.kontext}
               </figcaption>

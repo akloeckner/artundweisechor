@@ -128,8 +128,8 @@ function Galerie() {
           onClick={() => setOffen(null)}
         >
           <img
-            src={galerieBilder[offen].src}
-            alt={galerieBilder[offen].alt}
+            src={galerieBilder[offen]?.src}
+            alt={galerieBilder[offen]?.alt}
             className="max-h-[85vh] max-w-full object-contain"
             onClick={(e) => e.stopPropagation()}
           />

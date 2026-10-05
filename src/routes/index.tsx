@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Menu, Play, X, Youtube } from "lucide-react";
+import { ChevronLeft, ChevronRight, Facebook, Instagram, Menu, Play, X, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
@@ -9,6 +9,14 @@ import wdrImage from "@/assets/wdr.jpg";
 import standbildHuman from "@/assets/video-human.jpg.asset.json";
 import standbildFound from "@/assets/video-you-will-be-found.jpg.asset.json";
 import standbildJlaeser from "@/assets/video-alle-glaeser-huh.jpg.asset.json";
+import galerie1 from "@/assets/galerie-1.jpg.asset.json";
+import galerie2 from "@/assets/galerie-2.jpg.asset.json";
+import galerie3 from "@/assets/galerie-3.jpg.asset.json";
+import galerie4 from "@/assets/galerie-4.jpg.asset.json";
+import galerie5 from "@/assets/galerie-5.jpg.asset.json";
+import galerie6 from "@/assets/galerie-6.jpg.asset.json";
+import galerie7 from "@/assets/galerie-7.jpg.asset.json";
+import galerie8 from "@/assets/galerie-8.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,9 +71,85 @@ const navItems = [
   { id: "live", label: "Auftritte" },
   { id: "wir-ueber-uns", label: "Über uns" },
   { id: "zuhoeren", label: "Zuhören" },
+  { id: "galerie", label: "Galerie" },
   { id: "mitsingen", label: "Mitsingen" },
   { id: "buchen", label: "Buchen" },
 ];
+
+const galerieBilder = [
+  { src: galerie1.url, alt: "Gruppenbild des Chors" },
+  { src: galerie2.url, alt: "Benefizkonzert" },
+  { src: galerie3.url, alt: "Kneipentour 2017" },
+  { src: galerie4.url, alt: "Weihnachtsmarkt 2017" },
+  { src: galerie5.url, alt: "Der Chor bei einem Auftritt" },
+  { src: galerie6.url, alt: "Konzert in Pesch" },
+  { src: galerie7.url, alt: "Chor in Aktion" },
+  { src: galerie8.url, alt: "Chor in Aktion" },
+];
+
+function Galerie() {
+  const [offen, setOffen] = useState<number | null>(null);
+  const n = galerieBilder.length;
+  useEffect(() => {
+    if (offen === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOffen(null);
+      if (e.key === "ArrowRight") setOffen((i) => (i === null ? i : (i + 1) % n));
+      if (e.key === "ArrowLeft") setOffen((i) => (i === null ? i : (i - 1 + n) % n));
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [offen, n]);
+  return (
+    <>
+      <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
+        {galerieBilder.map((b, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => setOffen(i)}
+            aria-label={`${b.alt} vergrößern`}
+            className="group aspect-square overflow-hidden bg-ink/10 ring-1 ring-ink/10 focus-visible:outline-2 focus-visible:outline-poster-red"
+          >
+            <img src={b.src} alt={b.alt} loading="lazy" className="size-full object-cover transition-transform duration-300 group-hover:scale-105" />
+          </button>
+        ))}
+      </div>
+      {offen !== null && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Bildansicht"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-ink/90 p-4"
+          onClick={() => setOffen(null)}
+        >
+          <img
+            src={galerieBilder[offen]?.src}
+            alt={galerieBilder[offen]?.alt}
+            className="max-h-[85vh] max-w-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button type="button" aria-label="Schließen" onClick={() => setOffen(null)} className="absolute right-4 top-4 grid size-12 place-items-center rounded-full bg-paper text-ink">
+            <X className="size-5" />
+          </button>
+          <button type="button" aria-label="Vorheriges Bild" onClick={(e) => { e.stopPropagation(); setOffen((offen - 1 + n) % n); }} className="absolute left-3 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-poster-yellow text-ink">
+            <ChevronLeft className="size-6" />
+          </button>
+          <button type="button" aria-label="Nächstes Bild" onClick={(e) => { e.stopPropagation(); setOffen((offen + 1) % n); }} className="absolute right-3 top-1/2 grid size-12 -translate-y-1/2 place-items-center rounded-full bg-poster-yellow text-ink">
+            <ChevronRight className="size-6" />
+          </button>
+          <p className="font-grotesk absolute bottom-4 left-1/2 -translate-x-1/2 text-sm text-paper">
+            {offen + 1} / {n}
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
 
 function VideoKlick({ driveId, titel, standbild }: { driveId: string; titel: string; standbild: string }) {
   const [an, setAn] = useState(false);
@@ -393,6 +477,20 @@ function Index() {
           />
           Unser erster WDR-Beitrag
         </a>
+      </section>
+
+      <section id="galerie" className="reveal scroll-mt-0 md:scroll-mt-[44px] bg-paper px-6 py-12">
+        <div className="mb-6 flex items-center gap-3">
+          <div className="size-3.5 shrink-0 rounded-full bg-poster-blue" />
+          <div className="size-3.5 shrink-0 rounded-full bg-poster-yellow" />
+        </div>
+        <h2 className="font-display max-w-[40ch] text-balance text-3xl uppercase leading-none tracking-[-0.02em]">
+          Galerie
+        </h2>
+        <p className="mt-4 max-w-[46ch] text-pretty text-base leading-relaxed text-ink/80">
+          Eine kleine Auswahl von Bildern, die uns in Aktion zeigen.
+        </p>
+        <Galerie />
       </section>
 
       <section id="mitsingen" className="reveal reveal-5 scroll-mt-0 md:scroll-mt-[44px] bg-cream px-6 py-12">

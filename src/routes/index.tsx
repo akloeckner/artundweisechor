@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Menu, X, Youtube } from "lucide-react";
+import { Facebook, Instagram, Menu, Play, X, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
@@ -60,6 +60,40 @@ const navItems = [
   { id: "mitsingen", label: "Mitsingen" },
   { id: "buchen", label: "Buchen" },
 ];
+
+function VideoKlick({ driveId, titel }: { driveId: string; titel: string }) {
+  const [an, setAn] = useState(false);
+  return (
+    <div className="relative aspect-video w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink/20 ring-1 ring-paper/20">
+      {an ? (
+        <iframe
+          src={`https://drive.google.com/file/d/${driveId}/preview`}
+          title={`${titel} – art & weise`}
+          allow="autoplay"
+          className="size-full"
+        />
+      ) : (
+        <button
+          type="button"
+          onClick={() => setAn(true)}
+          aria-label={`Video ${titel} abspielen`}
+          className="group relative block size-full text-left"
+        >
+          <img src={buehneImage} alt="" className="size-full object-cover opacity-70" />
+          <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/40 p-4 text-center">
+            <span className="flex size-16 items-center justify-center rounded-full bg-poster-yellow text-ink transition-transform group-hover:scale-105">
+              <Play className="ml-1 size-7" aria-hidden="true" />
+            </span>
+            <span className="font-display text-xl uppercase leading-none text-paper">{titel}</span>
+            <span className="max-w-[40ch] text-xs text-paper/80">
+              Beim Abspielen wird das Video von Google Drive geladen; dabei gelten die Datenschutzbestimmungen von Google.
+            </span>
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
 
 function Index() {
   const kalenderRef = useRef<HTMLIFrameElement>(null);
@@ -331,14 +365,7 @@ function Index() {
         <div className="mt-8 space-y-6">
           {hörproben.map((h) => (
             <figure key={h.driveId}>
-              <div className="aspect-video w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink/20 ring-1 ring-paper/20">
-                <iframe
-                  src={`https://drive.google.com/file/d/${h.driveId}/preview`}
-                  title={`${h.titel} – art & weise`}
-                  allow="autoplay"
-                  className="size-full"
-                />
-              </div>
+              <VideoKlick driveId={h.driveId} titel={h.titel} />
               <figcaption className="font-grotesk mt-2 text-sm font-medium text-paper/80">
                 {h.titel} · {h.kontext}
               </figcaption>

@@ -6,6 +6,9 @@ import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
 import wdrImage from "@/assets/wdr.jpg";
+import standbildHuman from "@/assets/video-human.jpg.asset.json";
+import standbildFound from "@/assets/video-you-will-be-found.jpg.asset.json";
+import standbildJlaeser from "@/assets/video-alle-glaeser-huh.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,16 +43,19 @@ const hörproben = [
     titel: "„Human“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "1NmuYiO6KoqodYB005xncHkzzOrE2KPFP",
+    standbild: standbildHuman.url,
   },
   {
     titel: "„You will be found“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "1kivRRaJGmbaM5ztkNppi6EcePiMUT6F6",
+    standbild: standbildFound.url,
   },
   {
     titel: "„Alle Jläser huh“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "19fmw7w49r0p8LgJQf2BjHSg3kq6uxa8j",
+    standbild: standbildJlaeser.url,
   },
 ];
 

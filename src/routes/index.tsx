@@ -177,14 +177,14 @@ function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string
           className="group relative block size-full text-left"
         >
           <img src={standbild} alt="" loading="lazy" className="size-full object-cover object-bottom sm:object-center" />
-          <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/30 p-4 text-center">
+          <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/20 p-4 text-center">
             <span className="flex size-16 items-center justify-center rounded-full bg-poster-yellow text-ink transition-transform group-hover:scale-105">
               <Play className="ml-1 size-7" aria-hidden="true" />
             </span>
             <span className="font-display text-xl uppercase leading-none text-paper">{titel}</span>
-            <span className="max-w-[40ch] text-xs text-paper/80">
-              Beim Abspielen wird das Video von {youtubeId ? "YouTube" : "Google Drive"} geladen; dabei gelten die Datenschutzbestimmungen von Google.
-            </span>
+          </span>
+          <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/85 via-ink/50 to-transparent px-3 pb-2 pt-8 text-center text-[10px] leading-snug text-paper/85 sm:text-xs">
+            Beim Abspielen wird das Video von {youtubeId ? "YouTube" : "Google Drive"} geladen; dabei gelten die Datenschutzbestimmungen von Google.
           </span>
         </button>
       )}

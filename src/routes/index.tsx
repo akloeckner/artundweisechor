@@ -160,7 +160,7 @@ function Galerie() {
 function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string | undefined; youtubeId?: string | undefined; titel: string; standbild: string }) {
   const [an, setAn] = useState(false);
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink/20 ring-1 ring-paper/20">
+    <div className={`relative w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink/20 ring-1 ring-paper/20 ${youtubeId ? "aspect-video" : "h-[260px] sm:h-auto sm:aspect-video"}`}>
       {an ? (
         <iframe
           src={youtubeId ? `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1` : `https://drive.google.com/file/d/${driveId}/preview`}
@@ -176,7 +176,7 @@ function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string
           aria-label={`Video ${titel} abspielen`}
           className="group relative block size-full text-left"
         >
-          <img src={standbild} alt="" loading="lazy" className="size-full object-cover" />
+          <img src={standbild} alt="" loading="lazy" className="size-full object-cover object-bottom sm:object-center" />
           <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/30 p-4 text-center">
             <span className="flex size-16 items-center justify-center rounded-full bg-poster-yellow text-ink transition-transform group-hover:scale-105">
               <Play className="ml-1 size-7" aria-hidden="true" />

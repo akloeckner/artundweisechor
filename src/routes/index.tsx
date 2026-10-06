@@ -160,23 +160,31 @@ function Galerie() {
 function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string | undefined; youtubeId?: string | undefined; titel: string; standbild: string }) {
   const [an, setAn] = useState(false);
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink/20 ring-1 ring-paper/20">
+    <div
+      className={`relative w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink ring-1 ring-paper/20 ${youtubeId ? "aspect-video" : ""}`}
+      style={youtubeId ? undefined : { paddingTop: "calc(56.25% + 48px)" }}
+    >
       {an ? (
         <iframe
           src={youtubeId ? `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1` : `https://drive.google.com/file/d/${driveId}/preview`}
           title={`${titel} – art & weise`}
           allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
           allowFullScreen
-          className="size-full"
+          className="absolute inset-0 size-full"
         />
       ) : (
         <button
           type="button"
           onClick={() => setAn(true)}
           aria-label={`Video ${titel} abspielen`}
-          className="group relative block size-full text-left"
+          className="group absolute inset-0 block size-full text-left"
         >
-          <img src={standbild} alt="" loading="lazy" className="size-full object-cover" />
+          {!youtubeId && (
+            <span className="font-grotesk absolute inset-x-0 top-0 flex h-12 items-center truncate px-4 text-sm font-medium text-paper/80">
+              {titel}
+            </span>
+          )}
+          <img src={standbild} alt="" loading="lazy" className="absolute inset-x-0 bottom-0 aspect-video w-full object-cover" />
           <span className="absolute inset-0 flex items-center justify-center bg-ink/10">
             <span className="flex size-14 items-center justify-center rounded-full bg-poster-yellow text-ink transition-transform group-hover:scale-105 sm:size-16">
               <Play className="ml-1 size-7" aria-hidden="true" />

@@ -130,8 +130,9 @@ function Impressum() {
             Diese Webseite setzt selbst keine Cookies und verwendet keine
             Analyse- oder Tracking-Werkzeuge. Schriften werden von unserem
             eigenen Server geladen. Die Konzertvideos stammen von Google Drive
-            und werden erst geladen, wenn Sie sie per Klick abspielen; dabei
-            gelten die Datenschutzbestimmungen von Google. Unsere Termine
+            bzw. YouTube (erweiterter Datenschutzmodus) und werden erst
+            geladen, wenn Sie sie per Klick abspielen; dabei gelten die
+            Datenschutzbestimmungen von Google. Unsere Termine
             werden aus dem Dienst Konzertmeister eingebunden.
           </p>
         </section>

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
-import wdrImage from "@/assets/wdr.jpg";
+import standbildWdr from "@/assets/video-wdr.jpg.asset.json";
 import standbildHuman from "@/assets/video-human.jpg.asset.json";
 import standbildFound from "@/assets/video-you-will-be-found.jpg.asset.json";
 import standbildJlaeser from "@/assets/video-alle-glaeser-huh.jpg.asset.json";
@@ -64,6 +64,12 @@ const hörproben = [
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "19fmw7w49r0p8LgJQf2BjHSg3kq6uxa8j",
     standbild: standbildJlaeser.url,
+  },
+  {
+    titel: "Unser erster WDR-Beitrag",
+    kontext: "Lokalzeit aus Bonn · WDR",
+    youtubeId: "I0lOYrhejHE",
+    standbild: standbildWdr.url,
   },
 ];
 
@@ -151,15 +157,16 @@ function Galerie() {
   );
 }
 
-function VideoKlick({ driveId, titel, standbild }: { driveId: string; titel: string; standbild: string }) {
+function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string | undefined; youtubeId?: string | undefined; titel: string; standbild: string }) {
   const [an, setAn] = useState(false);
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink/20 ring-1 ring-paper/20">
       {an ? (
         <iframe
-          src={`https://drive.google.com/file/d/${driveId}/preview`}
+          src={youtubeId ? `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1` : `https://drive.google.com/file/d/${driveId}/preview`}
           title={`${titel} – art & weise`}
-          allow="autoplay"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          allowFullScreen
           className="size-full"
         />
       ) : (
@@ -176,7 +183,7 @@ function VideoKlick({ driveId, titel, standbild }: { driveId: string; titel: str
             </span>
             <span className="font-display text-xl uppercase leading-none text-paper">{titel}</span>
             <span className="max-w-[40ch] text-xs text-paper/80">
-              Beim Abspielen wird das Video von Google Drive geladen; dabei gelten die Datenschutzbestimmungen von Google.
+              Beim Abspielen wird das Video von {youtubeId ? "YouTube" : "Google Drive"} geladen; dabei gelten die Datenschutzbestimmungen von Google.
             </span>
           </span>
         </button>
@@ -454,29 +461,14 @@ function Index() {
         </p>
         <div className="mt-8 space-y-6">
           {hörproben.map((h) => (
-            <figure key={h.driveId}>
-              <VideoKlick driveId={h.driveId} titel={h.titel} standbild={h.standbild} />
+            <figure key={h.titel}>
+              <VideoKlick driveId={h.driveId} youtubeId={h.youtubeId} titel={h.titel} standbild={h.standbild} />
               <figcaption className="font-grotesk mt-2 text-sm font-medium text-paper/80">
                 {h.titel} · {h.kontext}
               </figcaption>
             </figure>
           ))}
         </div>
-        <a
-          href="https://www.youtube.com/watch?v=I0lOYrhejHE"
-          target="_blank"
-          rel="noreferrer"
-          className="font-grotesk mt-8 inline-flex items-center gap-3 rounded-full bg-poster-yellow px-5 py-3 text-sm font-semibold text-ink ring-1 ring-poster-yellow"
-        >
-          <img
-            src={wdrImage}
-            alt=""
-            width={1154}
-            height={1154}
-            className="size-6 rounded-full object-cover"
-          />
-          Unser erster WDR-Beitrag
-        </a>
       </section>
 
       <section id="galerie" className="reveal scroll-mt-0 md:scroll-mt-[44px] bg-paper px-6 py-12">

@@ -161,8 +161,12 @@ function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string
   const [an, setAn] = useState(false);
   return (
     <div
-      className={`relative w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink ring-1 ring-paper/20 ${youtubeId ? "aspect-video" : ""}`}
-      style={youtubeId ? undefined : { paddingTop: "calc(56.25% + 48px)" }}
+      className={`relative isolate w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink ring-1 ring-paper/20 ${youtubeId ? "aspect-video" : ""}`}
+      style={{
+        ...(youtubeId ? {} : { paddingTop: "calc(56.25% + 48px)" }),
+        transform: "translateZ(0)",
+        WebkitMaskImage: "-webkit-radial-gradient(white, black)",
+      }}
     >
       {an ? (
         <iframe
@@ -170,7 +174,7 @@ function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string
           title={`${titel} – art & weise`}
           allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
           allowFullScreen
-          className="absolute inset-0 size-full"
+          className="absolute inset-0 size-full rounded-[min(4vw,12px)]"
         />
       ) : (
         <button

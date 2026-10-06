@@ -157,7 +157,7 @@ function Galerie() {
   );
 }
 
-function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string; youtubeId?: string; titel: string; standbild: string }) {
+function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string | undefined; youtubeId?: string | undefined; titel: string; standbild: string }) {
   const [an, setAn] = useState(false);
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-[min(4vw,12px)] bg-ink/20 ring-1 ring-paper/20">

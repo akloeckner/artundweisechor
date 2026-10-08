@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Facebook, Instagram, Menu, Play, X, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
@@ -125,7 +126,9 @@ function Galerie() {
           </button>
         ))}
       </div>
-      {offen !== null && (
+      {offen !== null &&
+        typeof document !== "undefined" &&
+        createPortal(
         <div
           role="dialog"
           aria-modal="true"
@@ -151,7 +154,8 @@ function Galerie() {
           <p className="font-grotesk absolute bottom-4 left-1/2 -translate-x-1/2 text-sm text-paper">
             {offen + 1} / {n}
           </p>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );

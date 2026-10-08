@@ -154,7 +154,8 @@ function Galerie() {
           <p className="font-grotesk absolute bottom-4 left-1/2 -translate-x-1/2 text-sm text-paper">
             {offen + 1} / {n}
           </p>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );

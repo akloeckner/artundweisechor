@@ -9,6 +9,9 @@ export const getRouter = () => {
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
+    // Trailing Slashes beibehalten statt umzuleiten, damit der statische
+    // Prerenderer /impressum/ direkt mit 200 beantwortet bekommt.
+    trailingSlash: "preserve",
     defaultPreloadStaleTime: 0,
   });
 

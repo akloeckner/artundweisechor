@@ -26,5 +26,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: webserver-dist
-          path: dist/client/
+          path: .output/public/
           retention-days: 14

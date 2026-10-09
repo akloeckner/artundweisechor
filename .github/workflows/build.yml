@@ -11,17 +11,16 @@ jobs:
       - name: Code auschecken
         uses: actions/checkout@v4
 
-      - name: Node.js 22 einrichten
-        uses: actions/setup-node@v4
+      - name: Bun einrichten
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 22
-          cache: npm
+          bun-version: latest
 
       - name: Abhängigkeiten installieren
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Statische Website bauen
-        run: npm run build
+        run: bun run build
 
       - name: Artefakt bereitstellen
         uses: actions/upload-artifact@v4

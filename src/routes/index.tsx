@@ -748,6 +748,8 @@ function Index() {
           </button>
         </div>
       </footer>
+
+      <ImpressumOverlay offen={impressumOffen} onSchliessen={() => setImpressumOffen(false)} />
     </div>
   );
 }

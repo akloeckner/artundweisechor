@@ -10,7 +10,7 @@ export default defineConfig({
   vite: {
     // Relative Pfade, damit das statische Artefakt auch in einem
     // Unterverzeichnis auf einem einfachen Webserver läuft.
-    base: "./",
+    base: "",
   },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).

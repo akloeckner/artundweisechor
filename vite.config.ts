@@ -7,13 +7,18 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  vite: {
+    // Relative Pfade, damit das statische Artefakt auch in einem
+    // Unterverzeichnis auf einem einfachen Webserver läuft.
+    base: "./",
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
-    // Prerender all static routes to plain HTML so the site can also be
+    // Prerender the single page to plain HTML so the site can also be
     // deployed to a simple web server without Node.js.
-    pages: [{ path: "/" }, { path: "/impressum" }],
+    pages: [{ path: "/" }],
     prerender: { enabled: true, autoStaticPathsDiscovery: false },
   },
 });

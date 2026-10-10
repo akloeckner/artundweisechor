@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Facebook, Instagram, Menu, Play, X, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -6,18 +6,18 @@ import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
-import standbildWdr from "@/assets/video-wdr.jpg.asset.json";
-import standbildHuman from "@/assets/video-human.jpg.asset.json";
-import standbildFound from "@/assets/video-you-will-be-found.jpg.asset.json";
-import standbildJlaeser from "@/assets/video-alle-glaeser-huh.jpg.asset.json";
-import galerie1 from "@/assets/galerie-1.jpg.asset.json";
-import galerie2 from "@/assets/galerie-2.jpg.asset.json";
-import galerie3 from "@/assets/galerie-3.jpg.asset.json";
-import galerie4 from "@/assets/galerie-4.jpg.asset.json";
-import galerie5 from "@/assets/galerie-5.jpg.asset.json";
-import galerie6 from "@/assets/galerie-6.jpg.asset.json";
-import galerie7 from "@/assets/galerie-7.jpg.asset.json";
-import galerie8 from "@/assets/galerie-8.jpg.asset.json";
+import standbildWdr from "@/assets/video-wdr.jpg";
+import standbildHuman from "@/assets/video-human.jpg";
+import standbildFound from "@/assets/video-you-will-be-found.jpg";
+import standbildJlaeser from "@/assets/video-alle-glaeser-huh.jpg";
+import galerie1 from "@/assets/galerie-1.jpg";
+import galerie2 from "@/assets/galerie-2.jpg";
+import galerie3 from "@/assets/galerie-3.jpg";
+import galerie4 from "@/assets/galerie-4.jpg";
+import galerie5 from "@/assets/galerie-5.jpg";
+import galerie6 from "@/assets/galerie-6.jpg";
+import galerie7 from "@/assets/galerie-7.jpg";
+import galerie8 from "@/assets/galerie-8.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -52,25 +52,25 @@ const hörproben = [
     titel: "„Human“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "1NmuYiO6KoqodYB005xncHkzzOrE2KPFP",
-    standbild: standbildHuman.url,
+    standbild: standbildHuman,
   },
   {
     titel: "„You will be found“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "1kivRRaJGmbaM5ztkNppi6EcePiMUT6F6",
-    standbild: standbildFound.url,
+    standbild: standbildFound,
   },
   {
     titel: "„Alle Jläser huh“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "19fmw7w49r0p8LgJQf2BjHSg3kq6uxa8j",
-    standbild: standbildJlaeser.url,
+    standbild: standbildJlaeser,
   },
   {
     titel: "Unser erster WDR-Beitrag",
     kontext: "Lokalzeit aus Bonn · WDR",
     youtubeId: "I0lOYrhejHE",
-    standbild: standbildWdr.url,
+    standbild: standbildWdr,
   },
 ];
 
@@ -84,14 +84,14 @@ const navItems = [
 ];
 
 const galerieBilder = [
-  { src: galerie1.url, alt: "Gruppenbild des Chors" },
-  { src: galerie2.url, alt: "Benefizkonzert" },
-  { src: galerie3.url, alt: "Kneipentour 2017" },
-  { src: galerie4.url, alt: "Weihnachtsmarkt 2017" },
-  { src: galerie5.url, alt: "Der Chor bei einem Auftritt" },
-  { src: galerie6.url, alt: "Konzert in Pesch" },
-  { src: galerie7.url, alt: "Chor in Aktion" },
-  { src: galerie8.url, alt: "Chor in Aktion" },
+  { src: galerie1, alt: "Gruppenbild des Chors" },
+  { src: galerie2, alt: "Benefizkonzert" },
+  { src: galerie3, alt: "Kneipentour 2017" },
+  { src: galerie4, alt: "Weihnachtsmarkt 2017" },
+  { src: galerie5, alt: "Der Chor bei einem Auftritt" },
+  { src: galerie6, alt: "Konzert in Pesch" },
+  { src: galerie7, alt: "Chor in Aktion" },
+  { src: galerie8, alt: "Chor in Aktion" },
 ];
 
 function Galerie() {
@@ -207,6 +207,148 @@ function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string
   );
 }
 
+function ImpressumOverlay({ offen, onSchliessen }: { offen: boolean; onSchliessen: () => void }) {
+  useEffect(() => {
+    if (!offen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onSchliessen();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [offen, onSchliessen]);
+
+  if (!offen || typeof document === "undefined") return null;
+
+  return createPortal(
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Impressum"
+      className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/90 p-4"
+      onClick={onSchliessen}
+    >
+      <div
+        className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-[min(4vw,12px)] bg-paper p-6 text-ink sm:p-10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          aria-label="Impressum schließen"
+          onClick={onSchliessen}
+          className="absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-ink text-paper"
+        >
+          <X className="size-5" />
+        </button>
+
+        <h2 className="font-display text-3xl uppercase leading-none tracking-[-0.02em]">
+          Impressum
+        </h2>
+
+        <section className="mt-8">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Angaben gemäß § 5 TMG
+          </h3>
+          <p className="mt-3 leading-relaxed">
+            art &amp; weise chor
+            <br />
+            Markus Kohlstädde
+            <br />
+            Kochwiesenstr. 33a
+            <br />
+            51067 Köln
+          </p>
+          <p className="mt-4 leading-relaxed">
+            <strong>Vertreten durch:</strong> Markus Kohlstädde
+          </p>
+          <p className="mt-4 leading-relaxed">
+            <strong>Kontakt:</strong>{" "}
+            <a
+              href="mailto:info@artundweisechor.de"
+              className="underline decoration-1 underline-offset-4"
+            >
+              info@artundweisechor.de
+            </a>
+          </p>
+        </section>
+
+        <section className="mt-10">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Haftung für Inhalte
+          </h3>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt.
+            Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
+            können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter
+            sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen
+            Gesetzen verantwortlich. Verpflichtungen zur Entfernung oder
+            Sperrung der Nutzung von Informationen nach den allgemeinen
+            Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung
+            ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
+            Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden
+            Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+          </p>
+        </section>
+
+        <section className="mt-8">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Haftung für Links
+          </h3>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Unser Angebot enthält Links zu externen Webseiten Dritter, auf
+            deren Inhalte wir keinen Einfluss haben. Deshalb können wir für
+            diese fremden Inhalte auch keine Gewähr übernehmen. Für die
+            Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
+            oder Betreiber der Seiten verantwortlich. Bei Bekanntwerden von
+            Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+          </p>
+        </section>
+
+        <section className="mt-8">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Urheberrecht
+          </h3>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf
+            diesen Seiten unterliegen dem deutschen Urheberrecht. Die
+            Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
+            Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
+            schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+            Downloads und Kopien dieser Seite sind nur für den privaten, nicht
+            kommerziellen Gebrauch gestattet.
+          </p>
+        </section>
+
+        <section className="mt-8">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Datenschutz
+          </h3>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Die Nutzung unserer Webseite ist in der Regel ohne Angabe
+            personenbezogener Daten möglich. Soweit auf unseren Seiten
+            personenbezogene Daten erhoben werden, erfolgt dies, soweit
+            möglich, stets auf freiwilliger Basis. Diese Daten werden ohne
+            Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.
+          </p>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Diese Webseite setzt selbst keine Cookies und verwendet keine
+            Analyse- oder Tracking-Werkzeuge. Schriften werden von unserem
+            eigenen Server geladen. Die Konzertvideos stammen von Google Drive
+            bzw. YouTube (erweiterter Datenschutzmodus) und werden erst
+            geladen, wenn Sie sie per Klick abspielen; dabei gelten die
+            Datenschutzbestimmungen von Google. Unsere Termine
+            werden aus dem Dienst Konzertmeister eingebunden.
+          </p>
+        </section>
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
 function Index() {
   const kalenderRef = useRef<HTMLIFrameElement>(null);
   const mobilNavRef = useRef<HTMLDivElement>(null);
@@ -214,6 +356,7 @@ function Index() {
   const [kalenderBereit, setKalenderBereit] = useState(false);
   const [aktiv, setAktiv] = useState("");
   const [menueOffen, setMenueOffen] = useState(false);
+  const [impressumOffen, setImpressumOffen] = useState(false);
 
   useEffect(() => {
     if (!menueOffen) return;
@@ -596,11 +739,17 @@ function Index() {
         </div>
         <div className="mt-8 flex items-center justify-between gap-4 border-t border-paper/10 pt-5">
           <span className="text-xs text-paper/50">© 2026 art &amp; weise chor</span>
-          <Link to="/impressum" className="font-grotesk text-xs text-paper/50 underline underline-offset-2">
+          <button
+            type="button"
+            onClick={() => setImpressumOffen(true)}
+            className="font-grotesk text-xs text-paper/50 underline underline-offset-2"
+          >
             Impressum
-          </Link>
+          </button>
         </div>
       </footer>
+
+      <ImpressumOverlay offen={impressumOffen} onSchliessen={() => setImpressumOffen(false)} />
     </div>
   );
 }

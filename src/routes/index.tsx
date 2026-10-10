@@ -207,6 +207,148 @@ function VideoKlick({ driveId, youtubeId, titel, standbild }: { driveId?: string
   );
 }
 
+function ImpressumOverlay({ offen, onSchliessen }: { offen: boolean; onSchliessen: () => void }) {
+  useEffect(() => {
+    if (!offen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onSchliessen();
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [offen, onSchliessen]);
+
+  if (!offen || typeof document === "undefined") return null;
+
+  return createPortal(
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Impressum"
+      className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/90 p-4"
+      onClick={onSchliessen}
+    >
+      <div
+        className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-[min(4vw,12px)] bg-paper p-6 text-ink sm:p-10"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          aria-label="Impressum schließen"
+          onClick={onSchliessen}
+          className="absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-ink text-paper"
+        >
+          <X className="size-5" />
+        </button>
+
+        <h2 className="font-display text-3xl uppercase leading-none tracking-[-0.02em]">
+          Impressum
+        </h2>
+
+        <section className="mt-8">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Angaben gemäß § 5 TMG
+          </h3>
+          <p className="mt-3 leading-relaxed">
+            art &amp; weise chor
+            <br />
+            Markus Kohlstädde
+            <br />
+            Kochwiesenstr. 33a
+            <br />
+            51067 Köln
+          </p>
+          <p className="mt-4 leading-relaxed">
+            <strong>Vertreten durch:</strong> Markus Kohlstädde
+          </p>
+          <p className="mt-4 leading-relaxed">
+            <strong>Kontakt:</strong>{" "}
+            <a
+              href="mailto:info@artundweisechor.de"
+              className="underline decoration-1 underline-offset-4"
+            >
+              info@artundweisechor.de
+            </a>
+          </p>
+        </section>
+
+        <section className="mt-10">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Haftung für Inhalte
+          </h3>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt.
+            Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
+            können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter
+            sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen
+            Gesetzen verantwortlich. Verpflichtungen zur Entfernung oder
+            Sperrung der Nutzung von Informationen nach den allgemeinen
+            Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung
+            ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
+            Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden
+            Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+          </p>
+        </section>
+
+        <section className="mt-8">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Haftung für Links
+          </h3>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Unser Angebot enthält Links zu externen Webseiten Dritter, auf
+            deren Inhalte wir keinen Einfluss haben. Deshalb können wir für
+            diese fremden Inhalte auch keine Gewähr übernehmen. Für die
+            Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
+            oder Betreiber der Seiten verantwortlich. Bei Bekanntwerden von
+            Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+          </p>
+        </section>
+
+        <section className="mt-8">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Urheberrecht
+          </h3>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Die durch die Seitenbetreiber erstellten Inhalte und Werke auf
+            diesen Seiten unterliegen dem deutschen Urheberrecht. Die
+            Vervielfältigung, Bearbeitung, Verbreitung und jede Art der
+            Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der
+            schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+            Downloads und Kopien dieser Seite sind nur für den privaten, nicht
+            kommerziellen Gebrauch gestattet.
+          </p>
+        </section>
+
+        <section className="mt-8">
+          <h3 className="font-grotesk text-sm font-semibold uppercase tracking-[0.18em] text-warm-muted">
+            Datenschutz
+          </h3>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Die Nutzung unserer Webseite ist in der Regel ohne Angabe
+            personenbezogener Daten möglich. Soweit auf unseren Seiten
+            personenbezogene Daten erhoben werden, erfolgt dies, soweit
+            möglich, stets auf freiwilliger Basis. Diese Daten werden ohne
+            Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.
+          </p>
+          <p className="mt-3 max-w-[62ch] leading-relaxed text-ink/80">
+            Diese Webseite setzt selbst keine Cookies und verwendet keine
+            Analyse- oder Tracking-Werkzeuge. Schriften werden von unserem
+            eigenen Server geladen. Die Konzertvideos stammen von Google Drive
+            bzw. YouTube (erweiterter Datenschutzmodus) und werden erst
+            geladen, wenn Sie sie per Klick abspielen; dabei gelten die
+            Datenschutzbestimmungen von Google. Unsere Termine
+            werden aus dem Dienst Konzertmeister eingebunden.
+          </p>
+        </section>
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
 function Index() {
   const kalenderRef = useRef<HTMLIFrameElement>(null);
   const mobilNavRef = useRef<HTMLDivElement>(null);
@@ -214,6 +356,7 @@ function Index() {
   const [kalenderBereit, setKalenderBereit] = useState(false);
   const [aktiv, setAktiv] = useState("");
   const [menueOffen, setMenueOffen] = useState(false);
+  const [impressumOffen, setImpressumOffen] = useState(false);
 
   useEffect(() => {
     if (!menueOffen) return;

@@ -7,17 +7,17 @@ import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
 import standbildWdr from "@/assets/video-wdr.jpg.asset.json";
-import standbildHuman from "@/assets/video-human.jpg.asset.json";
-import standbildFound from "@/assets/video-you-will-be-found.jpg.asset.json";
-import standbildJlaeser from "@/assets/video-alle-glaeser-huh.jpg.asset.json";
-import galerie1 from "@/assets/galerie-1.jpg.asset.json";
-import galerie2 from "@/assets/galerie-2.jpg.asset.json";
-import galerie3 from "@/assets/galerie-3.jpg.asset.json";
-import galerie4 from "@/assets/galerie-4.jpg.asset.json";
-import galerie5 from "@/assets/galerie-5.jpg.asset.json";
-import galerie6 from "@/assets/galerie-6.jpg.asset.json";
-import galerie7 from "@/assets/galerie-7.jpg.asset.json";
-import galerie8 from "@/assets/galerie-8.jpg.asset.json";
+import standbildHuman from "@/assets/video-human.jpg";
+import standbildFound from "@/assets/video-you-will-be-found.jpg";
+import standbildJlaeser from "@/assets/video-alle-glaeser-huh.jpg";
+import galerie1 from "@/assets/galerie-1.jpg";
+import galerie2 from "@/assets/galerie-2.jpg";
+import galerie3 from "@/assets/galerie-3.jpg";
+import galerie4 from "@/assets/galerie-4.jpg";
+import galerie5 from "@/assets/galerie-5.jpg";
+import galerie6 from "@/assets/galerie-6.jpg";
+import galerie7 from "@/assets/galerie-7.jpg";
+import galerie8 from "@/assets/galerie-8.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({

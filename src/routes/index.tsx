@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { ChevronLeft, ChevronRight, Facebook, Instagram, Menu, Play, X, Youtube } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -596,9 +596,13 @@ function Index() {
         </div>
         <div className="mt-8 flex items-center justify-between gap-4 border-t border-paper/10 pt-5">
           <span className="text-xs text-paper/50">© 2026 art &amp; weise chor</span>
-          <Link to="/impressum" className="font-grotesk text-xs text-paper/50 underline underline-offset-2">
+          <button
+            type="button"
+            onClick={() => setImpressumOffen(true)}
+            className="font-grotesk text-xs text-paper/50 underline underline-offset-2"
+          >
             Impressum
-          </Link>
+          </button>
         </div>
       </footer>
     </div>

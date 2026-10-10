@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
-import standbildWdr from "@/assets/video-wdr.jpg.asset.json";
+import standbildWdr from "@/assets/video-wdr.jpg";
 import standbildHuman from "@/assets/video-human.jpg";
 import standbildFound from "@/assets/video-you-will-be-found.jpg";
 import standbildJlaeser from "@/assets/video-alle-glaeser-huh.jpg";
@@ -52,25 +52,25 @@ const hörproben = [
     titel: "„Human“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "1NmuYiO6KoqodYB005xncHkzzOrE2KPFP",
-    standbild: standbildHuman.url,
+    standbild: standbildHuman,
   },
   {
     titel: "„You will be found“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "1kivRRaJGmbaM5ztkNppi6EcePiMUT6F6",
-    standbild: standbildFound.url,
+    standbild: standbildFound,
   },
   {
     titel: "„Alle Jläser huh“",
     kontext: "Vocal Vibes im Gloria · 17.7.2026",
     driveId: "19fmw7w49r0p8LgJQf2BjHSg3kq6uxa8j",
-    standbild: standbildJlaeser.url,
+    standbild: standbildJlaeser,
   },
   {
     titel: "Unser erster WDR-Beitrag",
     kontext: "Lokalzeit aus Bonn · WDR",
     youtubeId: "I0lOYrhejHE",
-    standbild: standbildWdr.url,
+    standbild: standbildWdr,
   },
 ];
 
@@ -84,14 +84,14 @@ const navItems = [
 ];
 
 const galerieBilder = [
-  { src: galerie1.url, alt: "Gruppenbild des Chors" },
-  { src: galerie2.url, alt: "Benefizkonzert" },
-  { src: galerie3.url, alt: "Kneipentour 2017" },
-  { src: galerie4.url, alt: "Weihnachtsmarkt 2017" },
-  { src: galerie5.url, alt: "Der Chor bei einem Auftritt" },
-  { src: galerie6.url, alt: "Konzert in Pesch" },
-  { src: galerie7.url, alt: "Chor in Aktion" },
-  { src: galerie8.url, alt: "Chor in Aktion" },
+  { src: galerie1, alt: "Gruppenbild des Chors" },
+  { src: galerie2, alt: "Benefizkonzert" },
+  { src: galerie3, alt: "Kneipentour 2017" },
+  { src: galerie4, alt: "Weihnachtsmarkt 2017" },
+  { src: galerie5, alt: "Der Chor bei einem Auftritt" },
+  { src: galerie6, alt: "Konzert in Pesch" },
+  { src: galerie7, alt: "Chor in Aktion" },
+  { src: galerie8, alt: "Chor in Aktion" },
 ];
 
 function Galerie() {

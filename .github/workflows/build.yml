@@ -29,3 +29,13 @@ jobs:
           path: .output/public/
           retention-days: 14
 
+      - name: Per FTPS auf Webserver übertragen
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_REMOTEDIR }}
+          local-dir: .output/public/
+          protocol: ftps
+          port: 21

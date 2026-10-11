@@ -1,6 +1,6 @@
 # Our Choir's Website
 
-Eine Website für meinen Chor
+Eine Website für meinen Chor.
 
 This project was built with [Lovable](https://lovable.dev).
 

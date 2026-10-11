@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { createRouter } from "@tanstack/react-router";
+import { createRouter, createMemoryHistory } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
 
 export const getRouter = () => {
@@ -8,9 +8,14 @@ export const getRouter = () => {
   const router = createRouter({
     routeTree,
     context: { queryClient },
+    // Im Browser Memory-History nutzen: Da die Website eine reine Einzelseite ist,
+    // bleibt der Router intern immer auf "/". So läuft die Seite in jedem beliebigen
+    // Unterverzeichnis (/chor/, /unterordner/, /index.html) ohne 404-Fehler.
+    history:
+      typeof window !== "undefined"
+        ? createMemoryHistory({ initialEntries: ["/"] })
+        : undefined,
     scrollRestoration: true,
-    // Trailing Slashes beibehalten statt umzuleiten, damit der statische
-    // Prerenderer /impressum/ direkt mit 200 beantwortet bekommt.
     trailingSlash: "preserve",
     defaultPreloadStaleTime: 0,
   });

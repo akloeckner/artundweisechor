@@ -1,7 +1,12 @@
 name: Build Static Webserver Artifact
 
-# Vorerst nur manuell starten: Actions → „Build Static Webserver Artifact“ → Run workflow.
 on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -28,17 +33,3 @@ jobs:
           name: webserver-dist
           path: .output/public/
           retention-days: 14
-
-      - name: Per FTPS auf Webserver übertragen (lftp)
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_REMOTEDIR: ${{ secrets.FTP_REMOTEDIR }}
-        run: |
-          sudo apt-get update -qq && sudo apt-get install -y lftp
-          lftp -e "\
-            mirror -R --verbose .output/public/ $FTP_REMOTEDIR;\
-            quit;\
-          " -u "$FTP_USERNAME","$FTP_PASSWORD" $FTP_SERVER
-    

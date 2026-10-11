@@ -37,8 +37,8 @@ jobs:
           FTP_REMOTEDIR: ${{ secrets.FTP_REMOTEDIR }}
         run: |
           sudo apt-get update -qq && sudo apt-get install -y lftp
-          lftp -e "
-            mirror -R --verbose .output/public/ $FTP_REMOTEDIR;
-            quit
+          lftp -e "\
+            mirror -R --verbose .output/public/ $FTP_REMOTEDIR;\
+            quit;\
           " -u "$FTP_USERNAME","$FTP_PASSWORD" $FTP_SERVER
     

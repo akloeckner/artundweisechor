@@ -1,0 +1,45 @@
+name: Publish Static Webserver Artifact
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Bun einrichten
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Abhängigkeiten installieren
+        run: bun install --frozen-lockfile
+
+      - name: Statische Website bauen
+        run: bun run build
+
+      - name: Artefakt bereitstellen
+        uses: actions/upload-artifact@v4
+        with:
+          name: webserver-dist
+          path: .output/public/
+          retention-days: 14
+
+      - name: Per FTPS auf Webserver übertragen (lftp)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_REMOTEDIR: ${{ secrets.FTP_REMOTEDIR }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y lftp
+          lftp -e "\
+            mirror -R --verbose .output/public/ $FTP_REMOTEDIR;\
+            quit;\
+          " -u "$FTP_USERNAME","$FTP_PASSWORD" $FTP_SERVER
+    

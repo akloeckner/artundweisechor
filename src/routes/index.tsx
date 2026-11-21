@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
-import logoImage from "@/assets/logo.png";
+import logoImage from "@/assets/logo-blau.png";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
 import standbildWdr from "@/assets/video-wdr.jpg";
@@ -495,12 +495,12 @@ function Index() {
 
       <section className="reveal reveal-1 px-6 pb-14 pt-8">
         <h1 className="sr-only">art &amp; weise – Popchor aus Köln</h1>
-        <div className="flex justify-center rounded-[min(4vw,16px)] bg-ink px-6 py-6 md:py-8">
+        <div className="flex justify-start">
           <img
             src={logoImage}
             alt="art & weise – 15 Jahre"
-            width={591}
-            height={438}
+            width={1182}
+            height={874}
             className="h-32 w-auto md:h-52"
           />
         </div>

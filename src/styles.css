@@ -66,8 +66,8 @@
   /* Bauhaus poster tokens (from chosen direction) */
   --ink: oklch(0.204 0.007 80);
   --paper: oklch(0.955 0.018 95);
-  --poster-red: oklch(0.577 0.178 29.2);
-  --poster-blue: oklch(0.46 0.15 262);
+  --poster-red: #1f5ac9; /* Königsblau aus dem Logo (Leitfarbe) */
+  --poster-blue: #00a8f8; /* Cyan aus dem Logo (Akzent) */
   --poster-yellow: oklch(0.765 0.148 75);
   --cream: oklch(0.93 0.026 90);
   --warm-muted: oklch(0.55 0.022 85);

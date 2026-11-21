@@ -7,11 +7,13 @@ import heroImage from "@/assets/hero.jpg";
 import logoOrange from "@/assets/logo-orange.png";
 import logoBlau from "@/assets/logo-blau.png";
 import logoViolett from "@/assets/logo-violett.png";
+import logoGruen from "@/assets/logo-gruen.png";
 
 const farbwelten = [
   { logo: logoOrange, red: "#e85d04", blue: "#d8053f", yellow: "#ffb916" },
   { logo: logoBlau, red: "#1f5ac9", blue: "#00a8f8", yellow: "#ffb916" },
   { logo: logoViolett, red: "#3824b7", blue: "#7a16d9", yellow: "#03acfa" },
+  { logo: logoGruen, red: "#137A5B", blue: "#2DC58B", yellow: "#8DF524" },
 ];
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";

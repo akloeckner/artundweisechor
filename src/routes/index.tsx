@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
-import logoImage from "@/assets/logo-blau.png";
+import logoImage from "@/assets/logo-orange.png";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
 import standbildWdr from "@/assets/video-wdr.jpg";

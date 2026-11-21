@@ -4,7 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
-import logoImage from "@/assets/logo-orange.png";
+import logoOrange from "@/assets/logo-orange.png";
+import logoBlau from "@/assets/logo-blau.png";
+import logoViolett from "@/assets/logo-violett.png";
+
+const farbwelten = [
+  { logo: logoOrange, red: "#e85d04", blue: "#d8053f", yellow: "#ffb916" },
+  { logo: logoBlau, red: "#1f5ac9", blue: "#00a8f8", yellow: "#ffb916" },
+  { logo: logoViolett, red: "#3824b7", blue: "#7a16d9", yellow: "#03acfa" },
+];
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
 import standbildWdr from "@/assets/video-wdr.jpg";
@@ -413,6 +421,15 @@ function Index() {
     return () => beobachter.disconnect();
   }, []);
 
+  const [farbwelt, setFarbwelt] = useState(0);
+  const welt = farbwelten[farbwelt] ?? farbwelten[0]!;
+  useEffect(() => {
+    const root = document.documentElement.style;
+    root.setProperty("--poster-red", welt.red);
+    root.setProperty("--poster-blue", welt.blue);
+    root.setProperty("--poster-yellow", welt.yellow);
+  }, [welt]);
+
   return (
     <div id="top" className="min-h-screen bg-paper font-sans text-ink antialiased">
       <header className="sticky top-0 z-50 hidden border-b border-ink/10 bg-paper/95 backdrop-blur md:block">
@@ -496,13 +513,20 @@ function Index() {
       <section className="reveal reveal-1 px-6 pb-14 pt-8">
         <h1 className="sr-only">art &amp; weise – Popchor aus Köln</h1>
         <div className="flex justify-start">
-          <img
-            src={logoImage}
-            alt="art & weise – 15 Jahre"
-            width={1182}
-            height={874}
-            className="h-32 w-auto md:h-52"
-          />
+          <button
+            type="button"
+            onClick={() => setFarbwelt((i) => (i + 1) % farbwelten.length)}
+            aria-label="Farbe wechseln"
+            className="cursor-pointer rounded-md transition-transform active:scale-95"
+          >
+            <img
+              src={welt.logo}
+              alt="art & weise – 15 Jahre"
+              width={1182}
+              height={874}
+              className="h-32 w-auto md:h-52"
+            />
+          </button>
         </div>
         <p className="font-grotesk mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-ink/70">
           Popmusik &amp; Kölsche Tön

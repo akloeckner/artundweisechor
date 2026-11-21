@@ -162,3 +162,8 @@
 .reveal-4 {
   animation-delay: 0.46s;
 }
+
+body * {
+  transition-property: background-color, color, border-color;
+  transition-duration: 400ms;
+}

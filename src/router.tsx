@@ -11,10 +11,9 @@ export const getRouter = () => {
     // Im Browser Memory-History nutzen: Da die Website eine reine Einzelseite ist,
     // bleibt der Router intern immer auf "/". So läuft die Seite in jedem beliebigen
     // Unterverzeichnis (/chor/, /unterordner/, /index.html) ohne 404-Fehler.
-    history:
-      typeof window !== "undefined"
-        ? createMemoryHistory({ initialEntries: ["/"] })
-        : undefined,
+    ...(typeof window !== "undefined"
+      ? { history: createMemoryHistory({ initialEntries: ["/"] }) }
+      : {}),
     scrollRestoration: true,
     trailingSlash: "preserve",
     defaultPreloadStaleTime: 0,

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero.jpg";
+import logoImage from "@/assets/logo.png";
 import gruppeImage from "@/assets/gruppe1.jpg";
 import buehneImage from "@/assets/gruppe2.jpg";
 import standbildWdr from "@/assets/video-wdr.jpg";
@@ -493,10 +494,16 @@ function Index() {
       </div>
 
       <section className="reveal reveal-1 px-6 pb-14 pt-8">
-        <h1 className="font-display text-balance text-[clamp(2.6rem,13vw,4.1rem)] uppercase leading-none tracking-[-0.03em]">
-          <span className="block">art &amp;</span>
-          <span className="block text-poster-red">weise</span>
-        </h1>
+        <h1 className="sr-only">art &amp; weise – Popchor aus Köln</h1>
+        <div className="flex justify-center rounded-[min(4vw,16px)] bg-ink px-6 py-6 md:py-8">
+          <img
+            src={logoImage}
+            alt="art & weise – 15 Jahre"
+            width={591}
+            height={438}
+            className="h-32 w-auto md:h-52"
+          />
+        </div>
         <p className="font-grotesk mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-ink/70">
           Popmusik &amp; Kölsche Tön
         </p>
